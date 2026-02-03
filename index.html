@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACIWHO FOUNDATION | Global Mission | HAI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'hi'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&display=swap');
+        body { font-family: 'Outfit', sans-serif; scroll-behavior: smooth; }
+        .hero-gradient { background: radial-gradient(circle at top right, #1e3a8a, #0f172a); }
+        .sector-card { transition: 0.4s; border: 1px solid #e2e8f0; }
+        .sector-card:hover { transform: translateY(-10px); border-color: #3b82f6; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        /* Google Translate Styling Fix */
+        .goog-te-gadget-simple { border-radius: 8px; padding: 5px; border: 1px solid #ddd !important; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+    </style>
+</head>
+<body class="bg-white">
+
+    <nav class="fixed top-0 w-full z-[1000] bg-white/80 backdrop-blur-md border-b">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="bg-blue-600 text-white px-3 py-1 rounded-lg font-black text-xl italic">HAI</div>
+                <div class="text-2xl font-black tracking-tighter text-slate-900 uppercase">ACIWHO</div>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div id="google_translate_element"></div>
+                <a href="#bank" class="hidden md:block bg-red-600 hover:bg-red-700 text-white px-8 py-2.5 rounded-full font-bold text-sm transition shadow-lg shadow-red-200">
+                    DONATE NOW
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-gradient pt-32 pb-24 text-white overflow-hidden">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight">One Vision. 9 Units.</h1>
+            <p class="text-blue-300 text-lg mb-16 font-medium max-w-2xl mx-auto">शक्तिशाली तकनीक (HAI) और निस्वार्थ सेवा (ACIWHO) का मेल जो दुनिया बदलने के लिए तैयार है।</p>
+            
+            <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-9 gap-3 max-w-6xl mx-auto">
+                <script>
+                    const units = [
+                        {icon: 'microchip', name: 'Tech'}, {icon: 'user-graduate', name: 'Skills'}, {icon: 'pills', name: 'Health'},
+                        {icon: 'bowl-food', name: 'Food'}, {icon: 'venus', name: 'Women'}, {icon: 'tree', name: 'Nature'},
+                        {icon: 'gavel', name: 'Legal'}, {icon: 'hands-helping', name: 'Volunteers'}, {icon: 'landmark', name: 'Finance'}
+                    ];
+                    units.forEach((u, i) => {
+                        document.write(`
+                            <div class="bg-white/10 p-4 rounded-xl border border-white/5 hover:bg-blue-600 transition cursor-pointer group">
+                                <i class="fas fa-${u.icon} text-xl mb-2 text-blue-400 group-hover:text-white"></i>
+                                <p class="text-[8px] font-black uppercase tracking-tighter">Unit ${i+1}<br>${u.name}</p>
+                            </div>
+                        `);
+                    });
+                </script>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-24">
+        <div class="container mx-auto px-6">
+            <h2 class="text-center text-4xl font-black mb-4 uppercase tracking-tighter">6 Global Development Sectors</h2>
+            <p class="text-center text-slate-500 mb-20 font-medium">नीचे दिए गए किसी भी क्षेत्र को चुनें और सीधे मदद करें।</p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <script>
+                    const sectors = [
+                        {id: 1, title: 'IT & Robotics', icon: 'fa-robot', color: 'blue', text: 'HAI (Hari AI) द्वारा एडवांस रोबोटिक्स और सॉफ्टवेयर रिसर्च।'},
+                        {id: 2, title: 'Skill Education', icon: 'fa-book-reader', color: 'green', text: 'गरीब बच्चों और युवाओं के लिए फ्री डिजिटल एजुकेशन पोर्टल।'},
+                        {id: 3, title: 'Global Health', icon: 'fa-heartbeat', color: 'red', text: 'फ्री मेडिकल चेकअप, दवाइयाँ और एम्बुलेंस सेवाएं।'},
+                        {id: 4, title: 'Food & Hunger', icon: 'fa-utensils', color: 'orange', text: 'अन्नपूर्णा रसोई के माध्यम से कोई भी भूखा न सोए।'},
+                        {id: 5, title: 'Women Power', icon: 'fa-female', color: 'purple', text: 'नारी सशक्तिकरण, सुरक्षा और आत्मनिर्भरता मिशन।'},
+                        {id: 6, title: 'Nature Save', icon: 'fa-seedling', color: 'emerald', text: 'लाखों पेड़ लगाना और जैविक खेती को बढ़ावा देना।'}
+                    ];
+
+                    sectors.forEach(s => {
+                        document.write(`
+                            <div class="sector-card p-10 rounded-[40px] bg-white flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-${s.color}-100 text-${s.color}-600 rounded-2xl flex items-center justify-center text-2xl mb-8">
+                                        <i class="fas ${s.icon}"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-black mb-4 uppercase">${s.title}</h3>
+                                    <p class="text-slate-500 leading-relaxed mb-10">${s.text}</p>
+                                </div>
+                                <button onclick="startPay('${s.title}')" class="w-full bg-slate-900 hover:bg-blue-600 text-white py-4 rounded-2xl font-black tracking-widest transition shadow-xl">
+                                    DONATE NOW
+                                </button>
+                            </div>
+                        `);
+                    });
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <section id="bank" class="py-24 bg-slate-50 border-t">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-black mb-16 italic">Unit 9: Financial Support Center</h2>
+            <div class="max-w-4xl mx-auto bg-white p-12 rounded-[50px] shadow-2xl border border-blue-100 grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-left">
+                    <h4 class="text-blue-600 font-bold mb-2 uppercase tracking-widest">Bank Details</h4>
+                    <p class="text-2xl font-black mb-6">ACIWHO WELFARE FOUNDATION</p>
+                    <div class="space-y-4 font-bold text-slate-700">
+                        <p class="flex justify-between border-b pb-2"><span>A/C No:</span> <span class="text-blue-800">502000XXXXXXXX</span></p>
+                        <p class="flex justify-between border-b pb-2"><span>IFSC:</span> <span class="text-blue-800">HDFC000XXXX</span></p>
+                        <p class="flex justify-between border-b pb-2"><span>Bank:</span> <span>HDFC BANK</span></p>
+                        <p class="text-xs text-slate-400 mt-4">UPI: harigovindsingh91-2@okhdfcbank</p>
+                    </div>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-3xl border-2 border-dashed border-blue-200">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=harigovindsingh91-2@okhdfcbank&pn=ACIWHO" class="mx-auto mix-blend-multiply" alt="UPI QR">
+                    <p class="mt-4 font-black text-blue-600">Scan to Support Any Sector</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center">
+        <p class="text-[10px] font-black text-slate-400 tracking-[0.6em] uppercase">
+            © 2026 ACIWHO FOUNDATION | Powered by HAI Systems | Global HQ: India
+        </p>
+    </footer>
+
+    <script>
+        function startPay(sectorName) {
+            const amount = prompt(`${sectorName} मिशन के लिए सहयोग राशि दर्ज करें:`, "500");
+            if(amount) {
+                // स्मार्ट लिंक जो मोबाइल ऐप्स को ट्रिगर करता है
+                const upiUrl = `upi://pay?pa=harigovindsingh91-2@okhdfcbank&pn=ACIWHO&am=${amount}&cu=INR&tn=Donation_for_${sectorName.replace(/ /g, '_')}`;
+                
+                // कोशिश करें कि ऐप खुले
+                window.location.href = upiUrl;
+
+                // डेस्कटॉप यूज़र्स के लिए बैकअप मैसेज
+                setTimeout(() => {
+                    alert("यदि आपका पेमेंट ऐप नहीं खुला है, तो कृपया बैंक डिटेल्स या QR कोड का उपयोग करें। धन्यवाद!");
+                    document.getElementById('bank').scrollIntoView();
+                }, 2500);
+            }
+        }
+    </script>
+
+</body>
+</html>
