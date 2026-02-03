@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACIWHO WELFARE FOUNDATION | विकसित भारत, सशक्त विश्व</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+        body { font-family: 'Poppins', sans-serif; background-color: #f8fafc; scroll-behavior: smooth; }
+        .gradient-brand { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); }
+        .story-card { transition: all 0.3s ease; border: 1px solid #e2e8f0; border-radius: 24px; overflow: hidden; background: white; }
+        .story-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .img-container { height: 200px; overflow: hidden; position: relative; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .story-card:hover .img-container img { transform: scale(1.1); }
+        .nav-link { transition: color 0.3s; cursor: pointer; }
+        .nav-link:hover { color: #60a5fa; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-blue-900 text-white text-[10px] md:text-xs py-2 px-6 flex justify-between items-center">
+        <div class="flex flex-wrap gap-4">
+            <span><i class="fas fa-certificate text-yellow-400"></i> CIN: U88900UP2024NPL205552</span>
+            <span class="hidden sm:inline"><i class="fas fa-id-card text-blue-300"></i> PAN: ABACA9632Q</span>
+            <span class="hidden sm:inline"><i class="fas fa-university text-orange-400"></i> Darpan ID: UP/2024/0434959</span>
+        </div>
+        <div class="font-bold text-blue-300 uppercase tracking-widest">Secured by HAI</div>
+    </div>
+
+    <nav class="bg-slate-900 text-white py-4 px-6 sticky top-0 z-50 shadow-xl">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-2xl font-extrabold text-blue-400 tracking-tighter">ACIWHO</div>
+            <div class="hidden lg:flex gap-8 text-sm font-medium items-center">
+                <a href="#" class="nav-link">होम</a>
+                <a href="#about" class="nav-link">हमारे बारे में</a>
+                <a href="#sectors" class="nav-link">कार्य क्षेत्र</a>
+                <a href="#register" class="nav-link">वालंटियर</a>
+                <button onclick="openDonateModal('General Support')" class="bg-yellow-500 hover:bg-yellow-400 text-black px-6 py-2 rounded-full font-bold transition">अभी दान दें</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="gradient-brand text-white py-24 px-6 text-center">
+        <h1 class="text-4xl md:text-7xl font-extrabold mb-4">ACIWHO WELFARE FOUNDATION</h1>
+        <p class="text-blue-200 text-xl md:text-2xl italic mb-10 max-w-3xl mx-auto">"Global Action for National Progress — विकसित भारत, सशक्त विश्व"</p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="#sectors" class="bg-blue-600 px-8 py-3 rounded-full font-bold hover:bg-blue-700 transition shadow-lg">हमारे मिशन</a>
+            <button onclick="openDonateModal('Nation Building')" class="bg-white text-blue-900 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">सहयोग करें</button>
+        </div>
+    </header>
+
+    <section id="sectors" class="py-16 bg-slate-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-12">मुख्य मिशन और कार्य क्षेत्र</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="story-card">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&q=80&w=800"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">रिसर्च और रोबोटिक्स</h3>
+                        <p class="text-gray-600 text-sm mb-6">स्वदेशी HAI (Hari AI) तकनीक और सुरक्षा प्रणालियों का विकास।</p>
+                        <button onclick="openDonateModal('Robotics')" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700">सहयोग दें</button>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1503676260728-1c00da07bb5e?auto=format&fit=crop&q=80&w=800"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">शिक्षा और कौशल</h3>
+                        <p class="text-gray-600 text-sm mb-6">वंचित बच्चों के लिए डिजिटल शिक्षा और HAI संचालित ट्रेनिंग सेंटर।</p>
+                        <button onclick="openDonateModal('Education')" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700">सहयोग दें</button>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1590400541360-394723ff9a6e?auto=format&fit=crop&q=80&w=800"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">डिफेंस और सुरक्षा</h3>
+                        <p class="text-gray-600 text-sm mb-6">राष्ट्र रक्षा हेतु तकनीकी समाधान और सुरक्षा प्रणालियों का सशक्तिकरण।</p>
+                        <button onclick="openDonateModal('Defense')" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700">सहयोग दें</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="donateModal" class="fixed inset-0 bg-black/80 hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full relative shadow-2xl">
+            <button onclick="closeDonateModal()" class="absolute top-4 right-4 text-3xl font-bold text-gray-400 hover:text-black">&times;</button>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">राष्ट्र निर्माण में सहयोग</h3>
+            <p id="donationCategory" class="text-blue-600 font-bold mb-6 text-sm italic"></p>
+            
+            <input type="number" id="donateAmt" placeholder="राशि दर्ज करें (₹)" class="w-full p-4 border-2 border-gray-100 rounded-xl mb-6 focus:border-blue-600 outline-none">
+            
+            <button onclick="initiatePayment()" class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-700 shadow-lg transition">
+                <i class="fas fa-qrcode mr-2"></i> UPI से दान दें
+            </button>
+            <p class="text-[10px] text-center mt-4 text-gray-400 uppercase tracking-widest">Secured by HAI (Hari AI) Encryption</p>
+        </div>
+    </div>
+
+    <footer class="bg-slate-900 text-white py-12 px-6">
+        <div class="container mx-auto text-center">
+            <h4 class="text-2xl font-bold text-blue-400 mb-4">ACIWHO WELFARE FOUNDATION</h4>
+            <p class="text-gray-400 text-sm mb-6">28, Bunda, Meerahamadpur, Tilak, Bunda, Phoolpur, Azamgarh-223226</p>
+            <div class="h-px bg-white/10 w-full mb-6"></div>
+            <p class="text-gray-500 text-[11px] uppercase tracking-widest">
+                © 2026 Powered by HAI | पूरी तरह विकेंद्रीकृत (Decentralized) | कोई एडमिन पैनल नहीं
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function openDonateModal(cat) {
+            document.getElementById('donationCategory').innerText = "मिशन: " + cat;
+            document.getElementById('donateModal').classList.remove('hidden');
+        }
+
+        function closeDonateModal() {
+            document.getElementById('donateModal').classList.add('hidden');
+        }
+
+        function initiatePayment() {
+            const amount = document.getElementById('donateAmt').value;
+            if(!amount || amount <= 0) {
+                alert("कृपया वैध राशि डालें");
+                return;
+            }
+            
+            const upiId = "harigovindsingh91-2@okhdfcbank";
+            const businessName = "ACIWHO WELFARE FOUNDATION";
+            // encodeURIComponent सुनिश्चित करता है कि नाम सही से ऐप में दिखे
+            const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(businessName)}&am=${amount}&cu=INR&tn=Donation-to-ACIWHO`;
+            
+            window.location.href = upiUrl;
+            
+            // बैकअप के लिए अलर्ट अगर ब्राउज़र UPI हैंडल न कर पाए
+            setTimeout(() => {
+                alert("यदि आपका पेमेंट ऐप नहीं खुला है, तो आप इस UPI ID पर दान भेज सकते हैं: " + upiId);
+            }, 2500);
+        }
+
+        // Close modal on outside click
+        window.onclick = function(e) {
+            if (e.target.id === 'donateModal') closeDonateModal();
+        }
+    </script>
+</body>
+</html>
