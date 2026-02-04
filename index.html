@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACIWHO GLOBAL | HAI Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&display=swap');
+        body { font-family: 'Outfit', sans-serif; background: #ffffff; scroll-behavior: smooth; overflow-x: hidden; }
+        .sector-card { border-radius: 45px; background: #fff; border: 1px solid #eee; transition: 0.4s; position: relative; overflow: hidden; }
+        .sector-card:hover { transform: translateY(-10px); box-shadow: 0 30px 50px rgba(0,0,0,0.05); border-color: #3b82f6; }
+        .detail-card { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 10000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px); }
+        .active-popup { display: flex; }
+        #sideMenu { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
+        #sideMenu.open { transform: translateX(0); }
+        #map { height: 250px; border-radius: 25px; margin-bottom: 20px; z-index: 1; }
+        /* Chatbot Style */
+        #chatBox { display: none; position: fixed; bottom: 90px; right: 30px; width: 320px; height: 400px; background: white; border-radius: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); z-index: 2000; flex-direction: column; overflow: hidden; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <div id="google_translate_element" style="display:none"></div>
+
+    <nav class="fixed top-0 w-full z-[500] bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="bg-blue-600 text-white px-3 py-1 rounded font-black italic">HAI</span>
+                <span class="text-xl font-black uppercase tracking-tighter">ACIWHO <span class="text-blue-600">GLOBAL</span></span>
+            </div>
+            <div class="flex items-center gap-6">
+                <div id="userLocation" class="hidden md:block text-[10px] font-black text-slate-400 uppercase tracking-widest bg-slate-100 px-3 py-1 rounded-full italic">Detecting IP...</div>
+                <button onclick="toggleMenu()" class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-all">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="sideMenu" class="fixed top-0 right-0 h-full w-full md:w-[450px] bg-white z-[1000] shadow-2xl p-8 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-black italic uppercase">HAI <span class="text-blue-600">Explorer</span></h2>
+            <button onclick="toggleMenu()" class="text-2xl">&times;</button>
+        </div>
+
+        <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Global Live Presence</p>
+        <div id="map"></div>
+
+        <div class="bg-slate-50 p-6 rounded-[30px] mb-6 border border-slate-100">
+            <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Language Control</p>
+            <select onchange="changeLanguage(this.value)" class="w-full bg-white border text-xs font-bold p-3 rounded-xl outline-none mb-4">
+                <option value="hi">हिन्दी (Hindi)</option>
+                <option value="en">English (Global)</option>
+                <option value="es">Español</option>
+                <option value="ar">العربية</option>
+                <option value="fr">Français</option>
+            </select>
+            <p id="ipAddress" class="text-[11px] font-bold text-slate-600 italic">Connecting to Satellite...</p>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-xs font-black uppercase text-blue-600 mb-3">About ACIWHO Foundation</h3>
+            <p class="text-sm text-slate-500 font-medium leading-relaxed italic">ACIWHO WELFARE FOUNDATION एक वैश्विक डिजिटल NGO है। हम IT, हेल्थ और शिक्षा के माध्यम से समाज में बदलाव ला रहे हैं।</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4">
+            <button onclick="openRegistration()" class="bg-black text-white p-5 rounded-3xl font-black text-xs uppercase tracking-widest hover:bg-blue-600 transition-all text-left flex justify-between items-center">
+                Donor Registration <i class="fas fa-user-plus"></i>
+            </button>
+            <a href="mailto:aciwhofoundation@gmail.com" class="bg-slate-100 p-5 rounded-3xl font-black text-xs uppercase tracking-widest text-left flex justify-between items-center">
+                Help & Support <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </div>
+
+    <section class="pt-40 pb-20 px-6">
+        <div class="container mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-black italic tracking-tighter mb-6 uppercase">ACIWHO <span class="text-blue-600">Mission Units</span></h1>
+            <p class="text-slate-500 max-w-2xl mx-auto font-medium italic">9 मिशन यूनिट्स जो दुनिया बदल रही हैं।</p>
+        </div>
+    </section>
+
+    <section class="pb-32 px-6">
+        <div class="container mx-auto grid md:grid-cols-3 gap-8" id="sector-grid"></div>
+    </section>
+
+    <div id="chatBox">
+        <div class="bg-blue-600 p-4 text-white font-black italic flex justify-between">
+            <span>HAI ASSISTANT</span>
+            <button onclick="toggleChat()">&times;</button>
+        </div>
+        <div class="p-4 flex-1 overflow-y-auto text-sm space-y-4" id="chatContent">
+            <div class="bg-slate-100 p-3 rounded-2xl rounded-tl-none italic">नमस्ते! मैं HAI हूँ। मैं आपकी क्या मदद कर सकता हूँ?</div>
+        </div>
+        <div class="p-4 border-t flex gap-2">
+            <input type="text" id="chatInput" placeholder="Type here..." class="flex-1 text-xs border p-2 rounded-full outline-none">
+            <button onclick="sendChat()" class="bg-blue-600 text-white px-4 rounded-full text-xs font-bold">Send</button>
+        </div>
+    </div>
+
+    <button onclick="toggleChat()" class="fixed bottom-6 right-6 w-16 h-16 bg-blue-600 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl hover:scale-110 transition-all z-[1000]">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+
+    <div id="detailPopup" class="detail-card">
+        <div class="bg-white rounded-[40px] max-w-2xl w-full p-10 relative">
+            <button onclick="closePopup()" class="absolute top-6 right-6 text-slate-400 hover:text-black text-2xl">&times;</button>
+            <div id="popupContent"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+        // Supabase Init
+        const SB_URL = "https://d0616364-4643-4c6f-a6dc-57a0bc65d7ed.supabase.co"; 
+        const SB_KEY = "sba_0a2432244391098827fa8aeedce7bf2a0791a95c";
+        const _supabase = supabase.createClient(SB_URL, SB_KEY);
+
+        const sectors = [
+            {id:'01', t:'IT & Robotics', d:'AI-संचालित गवर्नेंस, मानव रहित राहत ड्रोन, और उन्नत रोबोटिक्स लैब का निर्माण।', img:'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800'},
+            {id:'02', t:'Digital Skills', d:'ग्रामीण युवाओं के लिए फ्री कोडिंग, सायबर सिक्योरिटी और डिजिटल मार्केटिंग सेंटर।', img:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800'},
+            {id:'03', t:'Health Unit', d:'मोबाइल हॉस्पिटल वैन, 24/7 टेली-मेडिसिन नेटवर्क और आपातकालीन ऑक्सीजन बैंक।', img:'https://images.unsplash.com/photo-1538108190935-61bb30dff19a?auto=format&fit=crop&w=800'},
+            {id:'04', t:'Food Security', d:'"Digital Ann Bank" जहाँ खराब होने वाले अनाज को ब्लॉकचेन से ट्रैक किया जाता है।', img:'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800'},
+            {id:'05', t:'Nari Shakti', d:'महिला उद्यमिता के लिए माइक्रो-लोन, डिफेंस ट्रेनिंग और सेल्फ़-हेल्प ग्रुप्स।', img:'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800'},
+            {id:'06', t:'Nature Lab', d:'ड्रोन आधारित वृक्षारोपण, प्लास्टिक कचरा रिसाइक्लिंग प्लांट और हरित ऊर्जा।', img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800'},
+            {id:'07', t:'Legal Cell', d:'मानवाधिकार उल्लंघन के खिलाफ मुफ्त कानूनी सहायता और Justice-on-Cloud।', img:'https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=800'},
+            {id:'08', t:'Global Team', d:'100+ देशों में फैले प्रशिक्षित स्वयंसेवकों की आपदा प्रबंधन वाहिनी।', img:'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800'},
+            {id:'09', t:'Finance Unit', d:'रियल-टाइम ब्लॉकचेन आधारित फंड ट्रैकिंग। UPI: 43137160754@sbi', img:'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800'}
+        ];
+
+        let currentCountry = "India";
+        let map;
+
+        // Init World Map
+        function initMap(lat = 20, lon = 77) {
+            if(map) map.remove();
+            map = L.map('map').setView([lat, lon], 3);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            L.marker([lat, lon]).addTo(map).bindPopup('You are here!').openPopup();
+        }
+
+        // Language Engine
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'hi'}, 'google_translate_element');
+        }
+
+        function changeLanguage(langCode) {
+            const select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = langCode;
+                select.dispatchEvent(new Event('change'));
+            }
+        }
+
+        window.onload = async () => {
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                const data = await res.json();
+                currentCountry = data.country_name;
+                document.getElementById('userLocation').innerText = `📍 ${data.city}, ${data.country_name}`;
+                document.getElementById('ipAddress').innerText = `IP: ${data.ip} | ${data.timezone}`;
+                initMap(data.latitude, data.longitude);
+            } catch(e) { initMap(); }
+            renderGrid();
+        };
+
+        function renderGrid() {
+            const grid = document.getElementById('sector-grid');
+            grid.innerHTML = sectors.map(s => `
+                <div class="sector-card p-8">
+                    <div class="h-48 rounded-[30px] overflow-hidden mb-6">
+                        <img src="${s.img}" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-2xl font-black italic uppercase mb-3">${s.t}</h3>
+                    <p class="text-slate-500 text-sm mb-8 line-clamp-2">${s.d}</p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="showDetail('${s.t}', '${s.d}')" class="py-3 rounded-2xl bg-slate-100 text-[10px] font-black uppercase tracking-widest hover:bg-slate-200">Details</button>
+                        <button onclick="initiatePayment('${s.t}')" class="py-3 rounded-2xl bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest">Donate</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function initiatePayment(unit) {
+            const donor = prompt("डोनर का पूरा नाम:");
+            const amount = prompt("राशि (INR):", "500");
+            if(!donor || !amount) return;
+
+            try {
+                const { error } = await _supabase.from('donations').insert([{ 
+                    donor_name: donor, amount, location: currentCountry, unit_name: unit, status: 'PENDING' 
+                }]);
+                if(error) throw error;
+
+                alert(`धन्यवाद ${donor}! भुगतान के लिए तैयार रहें।`);
+                window.location.href = `upi://pay?pa=43137160754@sbi&pn=ACIWHO_GLOBAL&am=${amount}&cu=INR&tn=HAI_DONATION_${unit}`;
+            } catch (err) { alert("Error: Database connection failed."); }
+        }
+
+        async function openRegistration() {
+            const name = prompt("Enter Name for Registration:");
+            const phone = prompt("Enter Phone Number:");
+            if(name && phone) {
+                const { error } = await _supabase.from('donors').insert([{ name, phone, country: currentCountry }]);
+                if(!error) alert("Registration Successful! Welcome to HAI Network.");
+                else alert("Registration failed. Please try again.");
+            }
+        }
+
+        // Chatbot Logic
+        function toggleChat() {
+            const cb = document.getElementById('chatBox');
+            cb.style.display = cb.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function sendChat() {
+            const input = document.getElementById('chatInput');
+            const content = document.getElementById('chatContent');
+            if(!input.value) return;
+
+            content.innerHTML += `<div class="bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none ml-auto max-w-[80%] text-xs">${input.value}</div>`;
+            
+            // Auto Response
+            setTimeout(() => {
+                content.innerHTML += `<div class="bg-slate-100 p-3 rounded-2xl rounded-tl-none italic text-xs">HAI Assistant: हम आपकी समस्या का समाधान 24 घंटे में करेंगे। सहायता के लिए aciwhofoundation@gmail.com पर लिखें।</div>`;
+                content.scrollTop = content.scrollHeight;
+            }, 1000);
+            input.value = '';
+        }
+
+        function toggleMenu() { document.getElementById('sideMenu').classList.toggle('open'); }
+        function closePopup() { document.getElementById('detailPopup').classList.remove('active-popup'); }
+        function showDetail(t, d) {
+            document.getElementById('popupContent').innerHTML = `<h2 class="text-3xl font-black italic text-blue-600 mb-4">${t}</h2><p class="text-slate-600 font-medium">${d}</p>`;
+            document.getElementById('detailPopup').classList.add('active-popup');
+        }
+    </script>
+</body>
+</html>
