@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACIWHO GLOBAL | Official Public Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&display=swap');
+        body { font-family: 'Outfit', sans-serif; background: #ffffff; color: #1a1a1a; scroll-behavior: smooth; }
+        .sector-card { border-radius: 40px; overflow: hidden; background: #fff; border: 1px solid #f0f0f0; transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); }
+        .sector-card:hover { transform: translateY(-15px); box-shadow: 0 40px 60px -15px rgba(0,0,0,0.1); border-color: #2563eb; }
+        .img-container { height: 280px; overflow: hidden; position: relative; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; }
+        .sector-card:hover .img-container img { transform: scale(1.1); }
+        .btn-donate { background: #2563eb; color: white; transition: 0.3s; }
+        .btn-donate:hover { background: #1d4ed8; box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3); }
+        .btn-detail { background: #f8fafc; color: #1e293b; border: 1px solid #e2e8f0; }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body>
+
+    <nav class="glass-nav fixed top-0 w-full z-[5000]">
+        <div class="container mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-600 text-white px-3 py-1 rounded-lg font-black italic">HAI</div>
+                <div class="text-2xl font-black tracking-tighter uppercase">ACIWHO <span class="text-blue-600">GLOBAL</span></div>
+            </div>
+            <div class="hidden md:flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
+                <a href="#" class="hover:text-blue-600">Home</a>
+                <a href="#mission" class="hover:text-blue-600">Mission Units</a>
+                <a href="#contact" class="hover:text-blue-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-48 pb-24 px-6 text-center">
+        <div class="container mx-auto">
+            <span class="bg-blue-50 text-blue-600 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-8 inline-block italic">Empowering Humanity Through Intelligence</span>
+            <h1 class="text-6xl md:text-8xl font-black italic tracking-tighter leading-none mb-8">GLOBAL <br><span class="text-blue-600 uppercase">SERVICE MATRIX.</span></h1>
+            <p class="max-w-2xl mx-auto text-slate-500 text-lg font-medium">9 विशिष्ट क्षेत्रों में मानवता की सेवा के लिए समर्पित एक वैश्विक नेटवर्क। पारदर्शी सहयोग और तकनीक का संगम।</p>
+        </div>
+    </section>
+
+    <section id="mission" class="py-20 bg-slate-50/50 px-6">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-3 gap-10">
+                <script>
+                    const sectors = [
+                        {id:'01', t:'IT & Robotics', d:'AI अनुसंधान और उन्नत रोबोटिक्स के माध्यम से भविष्य का निर्माण।', img:'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600'},
+                        {id:'02', t:'Digital Skills', d:'ग्रामीण क्षेत्रों में उच्च-स्तरीय डिजिटल शिक्षा और कौशल का विस्तार।', img:'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600'},
+                        {id:'03', t:'Health Unit', d:'वैश्विक स्वास्थ्य निगरानी और आपातकालीन चिकित्सा सहायता तंत्र।', img:'https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=600'},
+                        {id:'04', t:'Food Security', d:'FCI मॉडल पर आधारित डिजिटल अन्न बैंक और वितरण प्रणाली।', img:'https://images.unsplash.com/photo-1495570689269-d883b1224443?auto=format&fit=crop&w=600'},
+                        {id:'05', t:'Nari Shakti', d:'महिलाओं के लिए नेतृत्व, कौशल और आर्थिक आत्मनिर्भरता के अवसर।', img:'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600'},
+                        {id:'06', t:'Nature Lab', d:'पर्यावरण संरक्षण, वृक्षारोपण और जलवायु परिवर्तन के खिलाफ जंग।', img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600'},
+                        {id:'07', t:'Legal Cell', d:'मानवाधिकारों की सुरक्षा और समाज के लिए मुफ्त कानूनी सहायता।', img:'https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=600'},
+                        {id:'08', t:'Global Team', d:'पूरी दुनिया में फैले स्वयंसेवकों का एक सशक्त और अनुशासित नेटवर्क।', img:'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=600'},
+                        {id:'09', t:'Finance Unit', d:'पारदर्शी वित्तीय प्रबंधन और ऑडिटिंग सिस्टम।', img:'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600'}
+                    ];
+
+                    sectors.forEach(s => {
+                        document.write(`
+                            <div class="sector-card">
+                                <div class="img-container">
+                                    <img src="${s.img}" alt="${s.t}">
+                                    <div class="absolute top-6 left-6 bg-white px-3 py-1 rounded-full text-[10px] font-black text-blue-600 uppercase italic shadow-lg">Unit ${s.id}</div>
+                                </div>
+                                <div class="p-10">
+                                    <h3 class="text-3xl font-black italic uppercase tracking-tighter mb-4 text-slate-900">${s.t}</h3>
+                                    <p class="text-slate-500 text-sm leading-relaxed mb-10 h-[50px] overflow-hidden font-medium">${s.d}</p>
+                                    
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <button onclick="viewDetail('${s.t}')" class="btn-detail py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-200 transition">Detail</button>
+                                        <button onclick="sendToAdmin('${s.t}')" class="btn-donate py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest">Donate Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                    });
+
+                    // पब्लिक फंक्शन: डेटा केवल एडमिन लेजर में भेजेगा
+                    function sendToAdmin(unitName) {
+                        const donor = prompt("अपना नाम दर्ज करें:");
+                        const amount = prompt(`${unitName} के लिए सहयोग राशि (₹):`, "1000");
+                        
+                        if(donor && amount) {
+                            const locations = ["Lucknow", "Delhi", "Mumbai", "Bangalore", "Indore"];
+                            const loc = locations[Math.floor(Math.random()*locations.length)];
+                            
+                            const txn = {
+                                id: 'TXN' + Date.now().toString().slice(-5),
+                                unit: unitName,
+                                donor: donor,
+                                amount: amount,
+                                location: loc,
+                                status: 'PENDING',
+                                time: new Date().toLocaleString()
+                            };
+
+                            // डेटा को साझा डेटाबेस (localStorage) में डालना
+                            let ledger = JSON.parse(localStorage.getItem('hai_ledger') || '[]');
+                            ledger.push(txn);
+                            localStorage.setItem('hai_ledger', JSON.stringify(ledger));
+
+                            alert(`प्रणाम ${donor}! आपकी सहयोग राशि सत्यापन (Verification) के लिए भेज दी गई है। HAI Master के अप्रूवल के बाद यह प्रोसेस होगी।`);
+                            
+                            // UPI Intent (Wait Mode)
+                            window.location.href = `upi://pay?pa=43137160754@sbi&pn=ACIWHO_GLOBAL&am=${amount}&cu=INR&tn=VERIFY_${txn.id}`;
+                        }
+                    }
+
+                    function viewDetail(name) {
+                        alert(`${name} की विस्तृत योजना और एसेट्स रिपोर्ट जल्द ही लोड होगी...`);
+                    }
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="py-20 border-t border-slate-100 bg-white text-center">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-center items-center gap-2 mb-8">
+                <span class="bg-blue-600 text-white px-3 py-1 rounded font-black italic">HAI</span>
+                <span class="text-xl font-black uppercase tracking-tighter italic">ACIWHO GLOBAL</span>
+            </div>
+            <p class="text-slate-400 text-[10px] font-black uppercase tracking-[0.4em] italic mb-4">World Service Headquarters • Transparency Protocol 2026</p>
+            <p class="text-slate-300 text-[9px] uppercase">This portal is for public interaction only. All transactions require HAI Master Approval.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
